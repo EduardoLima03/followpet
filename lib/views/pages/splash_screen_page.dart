@@ -3,12 +3,22 @@ import 'package:followpet_alfa/data/database_helper.dart';
 import 'package:followpet_alfa/utils/colors.dart';
 import 'package:followpet_alfa/utils/images.dart';
 
-class SplashScreenPage extends StatelessWidget {
+class SplashScreenPage extends StatefulWidget {
+  @override
+  _SplashScreenPageState createState() => _SplashScreenPageState();
+}
+
+class _SplashScreenPageState extends State<SplashScreenPage> {
   DatabaseHelper db = DatabaseHelper();
-  var context;
+  int numberPet;
 
   @override
-  initState(){
+  // ignore: must_call_super
+  initState() {
+    db.getNumber().then((value) {
+      numberPet = value;
+    });
+
     _durationPage().then((value) {
       value != false ? _navigatorHome() : _navigatorCreatePet();
     });
@@ -16,18 +26,15 @@ class SplashScreenPage extends StatelessWidget {
 
   Future<bool> _durationPage() async{
     await Future.delayed(Duration(milliseconds: 5000), () {});
-    var numberPet;
+    
     /// vai retorna true se exisite pet no banco de dados
     /// false se nao existir
-    db.getNumber().then((value) {
-      numberPet = value;
-    });
+    
     return numberPet > 0? true: false;
   }
 
   void _navigatorCreatePet(){
-    
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: context), (route) => false);
+    Navigator.pushNamedAndRemoveUntil(context, '/form', (route) => false);
   }
 
   void _navigatorHome(){
@@ -36,8 +43,6 @@ class SplashScreenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ///gambiarra
-    this.context = context;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(

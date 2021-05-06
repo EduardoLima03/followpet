@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         primaryColor: primary,
         accentColor: fourth,
       ),
-      initialRoute: '/home',
+      initialRoute: '/',
       routes: {
         '/' : (context) => SplashScreenPage(),
         '/home': (context) => HomePage(),
