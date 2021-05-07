@@ -46,6 +46,7 @@ class DatabaseHelper {
   Future<int> delete(int id) async {
     Database dbPet = await db;
     return await dbPet.delete(tablePet, where: '$idPet = ?', whereArgs: [id]);
+    //qual valor inteiro ele retorna se a tupla for deletada?
   }
 
   Future<int> update(PetModel pet) async {

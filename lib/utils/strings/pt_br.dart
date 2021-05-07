@@ -1,0 +1,17 @@
+final String contentAlert = 'Ao clicar no botão OK você voltara para página principal';
+final String messageAlertUpd = 'O Registro foi realizado';
+final String messageAlertNew = 'Pet salvo com Sucesso';
+final String layoutDefultM = 'Tamanho da tela não reconhecida';
+final String fieldValidationM = 'Please enter some text';
+final String titlePageUpdates = 'Atualiza';
+final String titlePageRegister = 'Cadastro';
+final String titlePageHome = 'FollowPet - HOME';
+final String messagePetZero = 'Não tem pet cadastrado!!. aperte no botão para cadastra agora';
+final String fieldLabelBreed = 'Raça';
+final String male = 'Masculino';
+final String famale = 'Femea';
+final String fieldLabelGender = 'Genero';
+final String fieldLabelName = 'Nome';
+final String fieldLabelDate = 'Data de Nascimento';
+final String fieldLabelSpacie = 'Especie';
+final String titlePageDetails = 'Detalhes';

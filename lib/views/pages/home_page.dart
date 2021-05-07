@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:followpet_alfa/data/database_helper.dart';
 import 'package:followpet_alfa/model/pet_model.dart';
+import 'package:followpet_alfa/utils/strings/pt_br.dart';
 import 'package:followpet_alfa/views/widgets/card_widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('FollowPet Alfa'),
+        title: Text(titlePageHome),
       ),
       body: LayoutBuilder(builder: (context, constraints) {
         if (constraints.maxWidth < 600) {
@@ -82,8 +83,7 @@ class _HomePageState extends State<HomePage> {
       return Center(
         child: Padding(
           padding: EdgeInsets.all(24.00),
-          child: Text('Não tem pet cadastrado!!. '
-              'aperte no botão para cadastra agora'),
+          child: Text(messagePetZero),
         ),
       );
     }
@@ -105,8 +105,7 @@ class _HomePageState extends State<HomePage> {
       return Center(
         child: Padding(
           padding: EdgeInsets.all(24.00),
-          child: Text('Não tem pet cadastrado!!. '
-              'aperte no botão para cadastra agora'),
+          child: Text(messagePetZero),
         ),
       );
     }
@@ -128,15 +127,14 @@ class _HomePageState extends State<HomePage> {
       return Center(
         child: Padding(
           padding: EdgeInsets.all(24.00),
-          child: Text('Não tem pet cadastrado!!. '
-              'aperte no botão para cadastra agora'),
+          child: Text(messagePetZero),
         ),
       );
     }
   }
 
   Widget layoutDefult() {
-    return Container();
+    return Container(child: Center(child: Text(layoutDefultM),),);
   }
 
   /// Codigo presente na aula 104 do curso
@@ -144,18 +142,35 @@ class _HomePageState extends State<HomePage> {
   /// Tem a função de recarregar a lista de pets para ser exibido
   /// posterio a um insert na tela de cadastro
   void _showCadastrapet({PetModel petModel}) async {
-    final recPet =
-        await Navigator.pushNamed(context, '/form', arguments: petModel);
-    if (recPet != null) {
-      /// Sempre averá o retor do pet, sendo novo ou alterado. com
-      /// isso a lista de pet sera atualizada
-      /*if (petModel != null) {
-        await db.update(recPet);
 
-      }else{
-        await db.insert(recPet);
-      }*/
-      _getAllPets();
+    if(petModel != null){
+      final recPet =
+        await Navigator.pushNamed(context, '/details', arguments: petModel);
+      if (recPet != null) {
+        /// Sempre averá o retor do pet, sendo novo ou alterado. com
+        /// isso a lista de pet sera atualizada
+        /*if (petModel != null) {
+          await db.update(recPet);
+
+        }else{
+          await db.insert(recPet);
+        }*/
+        _getAllPets();
+      }
+    }else{
+      final recPet =
+          await Navigator.pushNamed(context, '/form', arguments: petModel);
+      if (recPet != null) {
+        /// Sempre averá o retor do pet, sendo novo ou alterado. com
+        /// isso a lista de pet sera atualizada
+        /*if (petModel != null) {
+          await db.update(recPet);
+
+        }else{
+          await db.insert(recPet);
+        }*/
+        _getAllPets();
+      }
     }
   }
 

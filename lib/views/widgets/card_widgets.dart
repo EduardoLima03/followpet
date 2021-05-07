@@ -16,7 +16,8 @@ class CardWidgets extends StatefulWidget {
 class _CardState extends State<CardWidgets> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Padding
+    (
       padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
       child: GestureDetector(
           onTap: (){

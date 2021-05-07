@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:followpet_alfa/data/database_helper.dart';
 import 'package:followpet_alfa/model/pet_model.dart';
 import 'package:followpet_alfa/utils/images.dart';
+import 'package:followpet_alfa/utils/strings/pt_br.dart';
 
 class FormPetPage extends StatefulWidget {
   @override
@@ -33,7 +34,7 @@ class _FormPetPageState extends State<FormPetPage> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text(_petInfo != null ? 'Atualiza' : 'Cadastro'),
+        title: Text(_petInfo != null ? titlePageUpdates : titlePageRegister),
       ),
       body: LayoutBuilder(builder: (context, constraints) {
         if (constraints.maxWidth < 600) {
@@ -41,9 +42,9 @@ class _FormPetPageState extends State<FormPetPage> {
         } else if (constraints.maxWidth >= 600 && constraints.maxWidth < 992) {
           return layoutMd(_petInfo);
         } else if (constraints.maxWidth >= 992 && constraints.maxWidth < 1200) {
-          return layoutLg();
+          return layoutLg(_petInfo);
         } else if (constraints.maxWidth >= 1200) {
-          return layoutXl();
+          return layoutXl(_petInfo);
         } else {
           return layoutDefult();
         }
@@ -62,7 +63,7 @@ class _FormPetPageState extends State<FormPetPage> {
             pet.IdPet = _petInfo.IdPet;
             db.update(pet).then((value) {
               if (value > 0)
-                showAlertDialog(context, "O Registro foi realizado");
+                showAlertDialog(context, messageAlertUpd);
             });
           } else {
             /// se não receber o pet, sera um no entao insert
@@ -72,7 +73,7 @@ class _FormPetPageState extends State<FormPetPage> {
 
             db.insert(pet).then((value) {
               pet.IdPet = value;
-              if (value > 0) showAlertDialog(context, "Pet salvo com Sucesso");
+              if (value > 0) showAlertDialog(context, messageAlertNew);
             });
           }
         },
@@ -101,12 +102,12 @@ class _FormPetPageState extends State<FormPetPage> {
                 keyboardType: TextInputType.name,
                 initialValue: recPet != null ? recPet.NamePet : null,
                 decoration: InputDecoration(
-                  labelText: 'Name',
+                  labelText: fieldLabelName,
                   icon: Icon(Icons.person),
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Please enter some text';
+                    return fieldValidationM;
                   }
                   return null;
                 },
@@ -115,12 +116,12 @@ class _FormPetPageState extends State<FormPetPage> {
               TextFormField(
                 controller: _controllerDate,
                 decoration: InputDecoration(
-                  labelText: 'Date',
+                  labelText: fieldLabelDate,
                   icon: Icon(Icons.date_range),
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Please enter some text';
+                    return fieldValidationM;
                   }
                   return null;
                 },
@@ -148,7 +149,7 @@ class _FormPetPageState extends State<FormPetPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Specie',
+                      fieldLabelSpacie,
                       style: TextStyle(fontSize: 18.0),
                     ),
                     Row(
@@ -184,28 +185,28 @@ class _FormPetPageState extends State<FormPetPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Gender',
+                      fieldLabelGender,
                       style: TextStyle(fontSize: 18.0),
                     ),
                     Row(
                       children: [
                         Radio(
-                          value: "Female",
+                          value: famale,
                           groupValue: _genderDelectedValue,
                           onChanged: _genderChanges,
                           activeColor: Theme.of(context).primaryColor,
                         ),
-                        Text("Female"),
+                        Text(famale),
                         SizedBox(
                           width: 30,
                         ),
                         Radio(
-                          value: "Male",
+                          value: male,
                           groupValue: _genderDelectedValue,
                           onChanged: _genderChanges,
                           activeColor: Theme.of(context).primaryColor,
                         ),
-                        Text("Male"),
+                        Text(male),
                       ],
                     ),
                   ],
@@ -216,11 +217,11 @@ class _FormPetPageState extends State<FormPetPage> {
                 initialValue: recPet != null ? recPet.BreedPet : null,
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
-                  labelText: 'Breed',
+                  labelText: fieldLabelBreed,
                   icon: Icon(Icons.pets),
                 ),
                 validator: (value) {
-                  if (value.isEmpty) return 'Please enter some text';
+                  if (value.isEmpty) return fieldValidationM;
 
                   return null;
                 },
@@ -233,7 +234,7 @@ class _FormPetPageState extends State<FormPetPage> {
     );
   }
 
-  ///fim do LayoutSM
+  //fim do LayoutSM
 
   Widget layoutMd(PetModel recPet) {
     return ListView(
@@ -256,14 +257,14 @@ class _FormPetPageState extends State<FormPetPage> {
                 keyboardType: TextInputType.name,
                 initialValue: recPet != null ? recPet.NamePet : null,
                 decoration: InputDecoration(
-                  labelText: 'Name',
+                  labelText: fieldLabelName,
                   labelStyle:
                       TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   icon: Icon(Icons.person),
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Please enter some text';
+                    return fieldValidationM;
                   }
                   return null;
                 },
@@ -272,14 +273,14 @@ class _FormPetPageState extends State<FormPetPage> {
               TextFormField(
                 controller: _controllerDate,
                 decoration: InputDecoration(
-                  labelText: 'Date',
+                  labelText: fieldLabelDate,
                   labelStyle:
                       TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   icon: Icon(Icons.date_range),
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Please enter some text';
+                    return fieldValidationM;
                   }
                   return null;
                 },
@@ -307,7 +308,7 @@ class _FormPetPageState extends State<FormPetPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Specie',
+                      fieldLabelSpacie,
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.bold),
                     ),
@@ -344,29 +345,29 @@ class _FormPetPageState extends State<FormPetPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Gender',
+                      fieldLabelGender,
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.bold),
                     ),
                     Row(
                       children: [
                         Radio(
-                          value: "Female",
+                          value: famale,
                           groupValue: _genderDelectedValue,
                           onChanged: _genderChanges,
                           activeColor: Theme.of(context).primaryColor,
                         ),
-                        Text("Female"),
+                        Text(famale),
                         SizedBox(
                           width: 30,
                         ),
                         Radio(
-                          value: "Male",
+                          value: male,
                           groupValue: _genderDelectedValue,
                           onChanged: _genderChanges,
                           activeColor: Theme.of(context).primaryColor,
                         ),
-                        Text("Male"),
+                        Text(male),
                       ],
                     ),
                   ],
@@ -377,13 +378,13 @@ class _FormPetPageState extends State<FormPetPage> {
                 initialValue: recPet != null ? recPet.BreedPet : null,
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
-                  labelText: 'Breed',
+                  labelText: fieldLabelBreed,
                   labelStyle:
                       TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   icon: Icon(Icons.pets),
                 ),
                 validator: (value) {
-                  if (value.isEmpty) return 'Please enter some text';
+                  if (value.isEmpty) return fieldValidationM;
 
                   return null;
                 },
@@ -396,20 +397,334 @@ class _FormPetPageState extends State<FormPetPage> {
     );
   }
 
-  ///fim do LayoutMD
+  //fim do LayoutMD
 
-  Widget layoutLg() {
-    return Container();
+  Widget layoutLg(PetModel recPet) {
+    return ListView(
+      padding: EdgeInsets.only(top: 30.0, left: 24.0, right: 24.0),
+      children: [
+        Form(
+          key: _formkey,
+          child: Column(
+            children: [
+              Container(
+                height: 160,
+                width: 160,
+                child: Image.asset(
+                    _specieDelectedValue == "dog" ? ICONDOG : ICONCAT),
+              ),
+              SizedBox(
+                height: 60,
+              ),
+              TextFormField(
+                keyboardType: TextInputType.name,
+                initialValue: recPet != null ? recPet.NamePet : null,
+                decoration: InputDecoration(
+                  labelText: fieldLabelName,
+                  labelStyle:
+                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  icon: Icon(Icons.person),
+                ),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return fieldValidationM;
+                  }
+                  return null;
+                },
+                onSaved: (value) => pet.NamePet = value,
+              ),
+              TextFormField(
+                controller: _controllerDate,
+                decoration: InputDecoration(
+                  labelText: fieldLabelDate,
+                  labelStyle:
+                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  icon: Icon(Icons.date_range),
+                ),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return fieldValidationM;
+                  }
+                  return null;
+                },
+                onSaved: (value) => pet.DateOfBirthPet = value,
+                onTap: () {
+                  showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2050))
+                      .then((value) {
+                    setState(() {
+                      _controllerDate.text =
+                          "${value.toString()[0]}${value.toString()[1]}${value.toString()[2]}${value.toString()[3]}${value.toString()[4]}${value.toString()[5]}${value.toString()[6]}${value.toString()[7]}${value.toString()[8]}${value.toString()[9]}";
+                    });
+                  });
+                },
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      fieldLabelSpacie,
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      children: [
+                        Radio(
+                          value: "dog",
+                          groupValue: _specieDelectedValue,
+                          onChanged: _specieChanges,
+                          activeColor: Theme.of(context).primaryColor,
+                        ),
+                        Text("Dog"),
+                        SizedBox(
+                          width: 50.0,
+                        ),
+                        Radio(
+                          value: "cat",
+                          groupValue: _specieDelectedValue,
+                          onChanged: _specieChanges,
+                          activeColor: Theme.of(context).primaryColor,
+                        ),
+                        Text("Cat"),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      fieldLabelGender,
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      children: [
+                        Radio(
+                          value: famale,
+                          groupValue: _genderDelectedValue,
+                          onChanged: _genderChanges,
+                          activeColor: Theme.of(context).primaryColor,
+                        ),
+                        Text(famale),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Radio(
+                          value: male,
+                          groupValue: _genderDelectedValue,
+                          onChanged: _genderChanges,
+                          activeColor: Theme.of(context).primaryColor,
+                        ),
+                        Text(male),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              // fim dos radio
+              TextFormField(
+                initialValue: recPet != null ? recPet.BreedPet : null,
+                keyboardType: TextInputType.name,
+                decoration: InputDecoration(
+                  labelText: fieldLabelBreed,
+                  labelStyle:
+                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  icon: Icon(Icons.pets),
+                ),
+                validator: (value) {
+                  if (value.isEmpty) return fieldValidationM;
+
+                  return null;
+                },
+                onSaved: (newValue) => pet.BreedPet = newValue,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
   //fim do LayoutLG
 
-  Widget layoutXl() {
-    return Container();
+  Widget layoutXl(PetModel recPet) {
+    return ListView(
+      padding: EdgeInsets.only(top: 30.0, left: 24.0, right: 24.0),
+      children: [
+        Form(
+          key: _formkey,
+          child: Column(
+            children: [
+              Container(
+                height: 160,
+                width: 160,
+                child: Image.asset(
+                    _specieDelectedValue == "dog" ? ICONDOG : ICONCAT),
+              ),
+              SizedBox(
+                height: 60,
+              ),
+              TextFormField(
+                keyboardType: TextInputType.name,
+                initialValue: recPet != null ? recPet.NamePet : null,
+                decoration: InputDecoration(
+                  labelText: fieldLabelName,
+                  labelStyle:
+                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  icon: Icon(Icons.person),
+                ),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return fieldValidationM;
+                  }
+                  return null;
+                },
+                onSaved: (value) => pet.NamePet = value,
+              ),
+              TextFormField(
+                controller: _controllerDate,
+                decoration: InputDecoration(
+                  labelText: fieldLabelDate,
+                  labelStyle:
+                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  icon: Icon(Icons.date_range),
+                ),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return fieldValidationM;
+                  }
+                  return null;
+                },
+                onSaved: (value) => pet.DateOfBirthPet = value,
+                onTap: () {
+                  showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2050))
+                      .then((value) {
+                    setState(() {
+                      _controllerDate.text =
+                          "${value.toString()[0]}${value.toString()[1]}${value.toString()[2]}${value.toString()[3]}${value.toString()[4]}${value.toString()[5]}${value.toString()[6]}${value.toString()[7]}${value.toString()[8]}${value.toString()[9]}";
+                    });
+                  });
+                },
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      fieldLabelSpacie,
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      children: [
+                        Radio(
+                          value: "dog",
+                          groupValue: _specieDelectedValue,
+                          onChanged: _specieChanges,
+                          activeColor: Theme.of(context).primaryColor,
+                        ),
+                        Text("Dog"),
+                        SizedBox(
+                          width: 50.0,
+                        ),
+                        Radio(
+                          value: "cat",
+                          groupValue: _specieDelectedValue,
+                          onChanged: _specieChanges,
+                          activeColor: Theme.of(context).primaryColor,
+                        ),
+                        Text("Cat"),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      fieldLabelGender,
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      children: [
+                        Radio(
+                          value: famale,
+                          groupValue: _genderDelectedValue,
+                          onChanged: _genderChanges,
+                          activeColor: Theme.of(context).primaryColor,
+                        ),
+                        Text(famale),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Radio(
+                          value: male,
+                          groupValue: _genderDelectedValue,
+                          onChanged: _genderChanges,
+                          activeColor: Theme.of(context).primaryColor,
+                        ),
+                        Text(male),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              // fim dos radio
+              TextFormField(
+                initialValue: recPet != null ? recPet.BreedPet : null,
+                keyboardType: TextInputType.name,
+                decoration: InputDecoration(
+                  labelText: fieldLabelBreed,
+                  labelStyle:
+                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  icon: Icon(Icons.pets),
+                ),
+                validator: (value) {
+                  if (value.isEmpty) return fieldValidationM;
+
+                  return null;
+                },
+                onSaved: (newValue) => pet.BreedPet = newValue,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
   //fim do LayoutXL
 
   Widget layoutDefult() {
-    return Container();
+    return Container(child: Center(child: Text(layoutDefultM),),);
   }
   //fim do LayoutDefult
 
@@ -444,7 +759,7 @@ class _FormPetPageState extends State<FormPetPage> {
 
     AlertDialog alert = AlertDialog(
       title: Text(mensagem),
-      content: Text('Ao clicar no botão OK você voltara para página principal'),
+      content: Text(contentAlert),
       actions: [
         okButton,
       ],

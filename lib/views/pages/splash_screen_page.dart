@@ -25,7 +25,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   }
 
   Future<bool> _durationPage() async{
-    await Future.delayed(Duration(milliseconds: 5000), () {});
+    await Future.delayed(Duration(milliseconds: 3000), () {});
     
     /// vai retorna true se exisite pet no banco de dados
     /// false se nao existir

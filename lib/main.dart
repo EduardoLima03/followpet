@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:followpet_alfa/utils/colors.dart';
+import 'package:followpet_alfa/views/pages/details_page.dart';
 import 'package:followpet_alfa/views/pages/form_pet_page.dart';
 import 'package:followpet_alfa/views/pages/home_page.dart';
 import 'package:followpet_alfa/views/pages/splash_screen_page.dart';
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
         '/' : (context) => SplashScreenPage(),
         '/home': (context) => HomePage(),
         '/form': (context) => FormPetPage(),
+        '/details': (context) => DetailsPage(),
+
       },
     );
   }
