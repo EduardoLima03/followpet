@@ -15,3 +15,7 @@ final String fieldLabelName = 'Nome';
 final String fieldLabelDate = 'Data de Nascimento';
 final String fieldLabelSpacie = 'Especie';
 final String titlePageDetails = 'Detalhes';
+final String titleAlertUpdate = 'Deseja atualiza?';
+final String titleAlertDelete = 'Deseja deleta?';
+final String titleButtonConfirms = 'Sim';
+final String titleButtonRefuse = 'Não';

@@ -17,14 +17,27 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     final PetModel _petInfo = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(titlePageDetails),
         actions: [
-          IconButton(icon: Icon(Icons.edit), onPressed: null),
+          IconButton(
+              icon: Icon(Icons.edit),
+              onPressed: () {
+                _actionBar(
+                    context: context,
+                    mensagem: titleAlertUpdate,
+                    petU: _petInfo);
+              }),
           IconButton(
             icon: Icon(Icons.delete),
-            onPressed: _delegatePet(context, "Deseja Deleta?", _petInfo.IdPet),
+            onPressed: () {
+              _actionBar(
+                  context: context,
+                  mensagem: titleAlertDelete,
+                  id: _petInfo.IdPet);
+            },
           ),
         ],
       ),
@@ -291,43 +304,35 @@ class _DetailsPageState extends State<DetailsPage> {
   }
   // Fim LayoutDefult
 
-  /// TODO Erro no deleta, a tela chama o alert antes de inicia a tela
   /// Esse metodo será responsavel por exibir o alert ao usuario perguntado
   /// se ela deseja deleta o pet
-  _delegatePet(BuildContext context, String mensagem, int id) {
-    Widget okButton = TextButton(
-      child: Text('OK'),
-      onPressed: () {
-        // se aperta nesse botao o pet sera deletado
-        db.delete(id).then((value) {
-          // quando for deletado volta para tela home
-          if (value > 0) {
-            print("$value");
-            //Navigator.popAndPushNamed(context, '/home', result: id);
-          }
-        });
-      },
-    );
-
-    Widget cancelButton = TextButton(
-      child: Text('CANCEL'),
-      onPressed: () {
-        //Navigator.of(context).pop();
-      },
-    );
-
-    AlertDialog alert = AlertDialog(
-      title: Text(mensagem),
-      actions: [
-        cancelButton,
-        okButton,
-      ],
-    );
-
-    showDialog(
+  _actionBar({BuildContext context, String mensagem, int id, PetModel petU}) {
+    return showDialog(
         context: context,
         builder: (BuildContext context) {
-          return alert;
+          return AlertDialog(
+            title: Text(mensagem),
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text(titleButtonRefuse)),
+              TextButton(
+                  onPressed: () {
+                    if (id != null) {
+                      db.delete(id).then((value) {
+                        if (value > 0) {
+                          Navigator.popAndPushNamed(context, '/home',
+                              result: value);
+                        }
+                      });
+                    } else {
+                      Navigator.pushNamed(context, '/form', arguments: petU);
+                      //Navigator.of(context).pop();
+                    }
+                  },
+                  child: Text(titleButtonConfirms)),
+            ],
+          );
         });
   }
   //fim do ShowDialog
