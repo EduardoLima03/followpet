@@ -4,6 +4,7 @@ import 'package:followpet_alfa/data/database_helper.dart';
 import 'package:followpet_alfa/model/pet_model.dart';
 import 'package:followpet_alfa/utils/images.dart';
 import 'package:followpet_alfa/utils/strings/pt_br.dart';
+import 'package:followpet_alfa/views/widgets/field_widgets.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({Key key}) : super(key: key);
@@ -45,11 +46,11 @@ class _DetailsPageState extends State<DetailsPage> {
         if (constraints.maxWidth < 600) {
           return layoutSm(_petInfo);
         } else if (constraints.maxWidth >= 600 && constraints.maxWidth < 992) {
-          return layoutMd();
+          return layoutMd(_petInfo);
         } else if (constraints.maxWidth >= 992 && constraints.maxWidth < 1200) {
-          return layoutLg();
+          return layoutLg(_petInfo);
         } else if (constraints.maxWidth >= 1200) {
-          return layoutXl();
+          return layoutXl(_petInfo);
         } else {
           return layoutDefult();
         }
@@ -61,6 +62,7 @@ class _DetailsPageState extends State<DetailsPage> {
     );
   }
 
+  // end LayoutSM
   Widget layoutSm(PetModel pet) {
     return ListView(
       padding: EdgeInsets.fromLTRB(60, 36, 60, 0),
@@ -73,38 +75,33 @@ class _DetailsPageState extends State<DetailsPage> {
         SizedBox(
           height: 55,
         ),
-        Row(
-          children: [
-            field(pet.NamePet, fieldLabelName),
-            Expanded(
-              child: SizedBox(),
-            ),
-            field(pet.DateOfBirthPet, fieldLabelDate),
-          ],
+        FieldWidgets(
+          label1: 'Nome',
+          value1: pet.NamePet,
+          label2: 'Data',
+          value2: pet.DateOfBirthPet,
+          sized: 18,
         ),
         SizedBox(
-          height: 20,
+          height: 6,
         ),
-        Row(
-          children: [
-            field(pet.SpeciePet, fieldLabelSpacie),
-            Expanded(
-              child: SizedBox(),
-            ),
-            field(pet.GenderPet, fieldLabelGender)
-          ],
+        FieldWidgets(
+          sized: 18,
+          label1: 'Especie',
+          value1: pet.SpeciePet,
+          label2: 'Ganero',
+          value2: pet.GenderPet,
         ),
         SizedBox(
-          height: 20,
+          height: 6,
         ),
-        Row(
-          children: [
-            field(pet.BreedPet, fieldLabelBreed),
-            Expanded(child: SizedBox()),
-            field("Second Breed", fieldLabelBreed)
-          ],
+        FieldWidgets(
+          sized: 18,
+          label1: 'Breed',
+          value1: pet.BreedPet,
+          label2: 'Breed',
+          value2: 'Second breed',
         ),
-        //SizedBox(height: 19,),
         Container(
           child: Divider(
             height: 30,
@@ -117,69 +114,23 @@ class _DetailsPageState extends State<DetailsPage> {
           'Vacinas',
           style: TextStyle(fontSize: 20),
         ),
-        SizedBox(height: 30),
-        Row(
-          children: [
-            Container(
-              width: 115,
-              child: Text(
-                pet.DateOfBirthPet,
-                style: TextStyle(fontSize: 18),
-              ),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                      color: Theme.of(context).primaryColor, width: 2),
-                ),
-              ),
-            ),
-            Expanded(child: SizedBox()),
-            Container(
-              width: 115,
-              child: Text(
-                "Cinomose",
-                style: TextStyle(fontSize: 18),
-              ),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                      color: Theme.of(context).primaryColor, width: 2),
-                ),
-              ),
-            ),
-          ],
+        SizedBox(height: 20),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Cinomose',
+          sized: 18,
         ),
         SizedBox(height: 20),
-        Row(
-          children: [
-            Container(
-              width: 115,
-              child: Text(
-                pet.DateOfBirthPet,
-                style: TextStyle(fontSize: 18),
-              ),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                      color: Theme.of(context).primaryColor, width: 2),
-                ),
-              ),
-            ),
-            Expanded(child: SizedBox()),
-            Container(
-              width: 115,
-              child: Text(
-                "Cinomose",
-                style: TextStyle(fontSize: 18),
-              ),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                      color: Theme.of(context).primaryColor, width: 2),
-                ),
-              ),
-            ),
-          ],
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Cinomose',
+          sized: 18,
+        ),
+        SizedBox(height: 20),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Anterabica',
+          sized: 18,
         ),
         // end section vaccine
         //TODO start section vermifuge
@@ -195,92 +146,232 @@ class _DetailsPageState extends State<DetailsPage> {
           style: TextStyle(fontSize: 20),
         ),
         SizedBox(height: 30),
-        Row(
-          children: [
-            Container(
-              width: 115,
-              child: Text(
-                pet.DateOfBirthPet,
-                style: TextStyle(fontSize: 18),
-              ),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                      color: Theme.of(context).primaryColor, width: 2),
-                ),
-              ),
-            ),
-            Expanded(child: SizedBox()),
-            Container(
-              width: 115,
-              child: Text(
-                "Ivermectina",
-                style: TextStyle(fontSize: 18),
-              ),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                      color: Theme.of(context).primaryColor, width: 2),
-                ),
-              ),
-            ),
-          ],
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Invermectina',
+          sized: 18,
+        ),
+        SizedBox(height: 20,),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Invermectina',
+          sized: 18,
+        ),
+        SizedBox(height: 20,),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Invermectina',
+          sized: 18,
         ),
       ],
     );
-    //Fim ListView
   }
-
-  // end LayoutSM
-  Container field(String value, String label) {
-    return Container(
-      width: 115,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 18,
-            ),
-          ),
-        ],
-      ),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Theme.of(context).primaryColor,
-            width: 2,
-          ),
-        ),
-      ),
-    );
-  }
-
   // Fim LayoutSM
-  Widget layoutMd() {
-    return Container(
-      child: Text('LayoutMD'),
-    );
-  }
 
-  // Fim LayoutMD
-  Widget layoutLg() {
+  Widget layoutMd(PetModel pet) {
     return ListView(
-      padding: EdgeInsets.fromLTRB(24.0, 36.0, 24.0, 0.0),
+      padding: EdgeInsets.fromLTRB(60, 36, 60, 0),
       children: [
         Container(
-          child: Image.asset(ICONDOG),
+          width: 180.0,
+          height: 180.0,
+          child: Image.asset(pet.SpeciePet == 'dog' ? ICONDOG : ICONCAT),
+        ),
+        SizedBox(
+          height: 55,
+        ),
+        FieldWidgets(
+          label1: 'Nome',
+          value1: pet.NamePet,
+          label2: 'Data',
+          value2: pet.DateOfBirthPet,
+          sized: 20,
+        ),
+        SizedBox(
+          height: 6,
+        ),
+        FieldWidgets(
+          sized: 20,
+          label1: 'Especie',
+          value1: pet.SpeciePet,
+          label2: 'Ganero',
+          value2: pet.GenderPet,
+        ),
+        SizedBox(
+          height: 6,
+        ),
+        FieldWidgets(
+          sized: 20,
+          label1: 'Breed',
+          value1: pet.BreedPet,
+          label2: 'Breed',
+          value2: 'Second breed',
+        ),
+        Container(
+          child: Divider(
+            height: 30,
+            color: Colors.grey,
+            thickness: 1,
+          ),
+        ),
+        // TODO start section vaccine
+        Text(
+          'Vacinas',
+          style: TextStyle(fontSize: 30),
+        ),
+        SizedBox(height: 20),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Cinomose',
+          sized: 20,
+        ),
+        SizedBox(height: 20),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Cinomose',
+          sized: 20,
+        ),
+        SizedBox(height: 20),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Anterabica',
+          sized: 20,
+        ),
+        // end section vaccine
+        //TODO start section vermifuge
+        Container(
+          child: Divider(
+            height: 30,
+            color: Colors.grey,
+            thickness: 1,
+          ),
+        ),
+        Text(
+          'Vermifugos',
+          style: TextStyle(fontSize: 30),
+        ),
+        SizedBox(height: 30),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Invermectina',
+          sized: 20,
+        ),
+        SizedBox(height: 20,),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Invermectina',
+          sized: 20,
+        ),
+        SizedBox(height: 20,),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Invermectina',
+          sized: 20,
+        ),
+      ],
+    );
+  }
+  // Fim LayoutMD
+
+  Widget layoutLg(PetModel pet) {
+    return ListView(
+      padding: EdgeInsets.fromLTRB(120, 36, 120, 0),
+      children: [
+        Container(
+          width: 250.0,
+          height: 250.0,
+          child: Image.asset(pet.SpeciePet == 'dog' ? ICONDOG : ICONCAT),
+        ),
+        SizedBox(
+          height: 55,
+        ),
+        FieldWidgets(
+          label1: 'Nome',
+          value1: pet.NamePet,
+          label2: 'Data',
+          value2: pet.DateOfBirthPet,
+          sized: 30,
+        ),
+        SizedBox(
+          height: 6,
+        ),
+        FieldWidgets(
+          sized: 30,
+          label1: 'Especie',
+          value1: pet.SpeciePet,
+          label2: 'Ganero',
+          value2: pet.GenderPet,
+        ),
+        SizedBox(
+          height: 6,
+        ),
+        FieldWidgets(
+          sized: 30,
+          label1: 'Breed',
+          value1: pet.BreedPet,
+          label2: 'Breed',
+          value2: 'Second breed',
+        ),
+        Container(
+          child: Divider(
+            height: 30,
+            color: Colors.grey,
+            thickness: 1,
+          ),
+        ),
+        // TODO start section vaccine
+        Text(
+          'Vacinas',
+          style: TextStyle(fontSize: 38),
+        ),
+        SizedBox(height: 20),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Cinomose',
+          sized: 30,
+        ),
+        SizedBox(height: 20),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Cinomose',
+          sized: 30,
+        ),
+        SizedBox(height: 20),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Anterabica',
+          sized: 30,
+        ),
+        // end section vaccine
+        //TODO start section vermifuge
+        Container(
+          child: Divider(
+            height: 30,
+            color: Colors.grey,
+            thickness: 1,
+          ),
+        ),
+        Text(
+          'Vermifugos',
+          style: TextStyle(fontSize: 38),
+        ),
+        SizedBox(height: 30),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Invermectina',
+          sized: 30,
+        ),
+        SizedBox(height: 20,),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Invermectina',
+          sized: 30,
+        ),
+        SizedBox(height: 20,),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Invermectina',
+          sized: 30,
         ),
       ],
     );
@@ -288,9 +379,107 @@ class _DetailsPageState extends State<DetailsPage> {
   }
 
   // Fim LayoutLG
-  Widget layoutXl() {
-    return Container(
-      child: Text('LayoutXl'),
+  Widget layoutXl(PetModel pet) {
+    return ListView(
+      padding: EdgeInsets.fromLTRB(120, 36, 120, 0),
+      children: [
+        Container(
+          width: 450.0,
+          height: 450.0,
+          child: Image.asset(pet.SpeciePet == 'dog' ? ICONDOG : ICONCAT),
+        ),
+        SizedBox(
+          height: 55,
+        ),
+        FieldWidgets(
+          label1: 'Nome',
+          value1: pet.NamePet,
+          label2: 'Data',
+          value2: pet.DateOfBirthPet,
+          sized: 40,
+        ),
+        SizedBox(
+          height: 6,
+        ),
+        FieldWidgets(
+          sized: 40,
+          label1: 'Especie',
+          value1: pet.SpeciePet,
+          label2: 'Ganero',
+          value2: pet.GenderPet,
+        ),
+        SizedBox(
+          height: 6,
+        ),
+        FieldWidgets(
+          sized: 40,
+          label1: 'Breed',
+          value1: pet.BreedPet,
+          label2: 'Breed',
+          value2: 'Second breed',
+        ),
+        Container(
+          child: Divider(
+            height: 30,
+            color: Colors.grey,
+            thickness: 1,
+          ),
+        ),
+        // TODO start section vaccine
+        Text(
+          'Vacinas',
+          style: TextStyle(fontSize: 48),
+        ),
+        SizedBox(height: 20),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Cinomose',
+          sized: 40,
+        ),
+        SizedBox(height: 20),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Cinomose',
+          sized: 40,
+        ),
+        SizedBox(height: 20),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Anterabica',
+          sized: 40,
+        ),
+        // end section vaccine
+        //TODO start section vermifuge
+        Container(
+          child: Divider(
+            height: 30,
+            color: Colors.grey,
+            thickness: 1,
+          ),
+        ),
+        Text(
+          'Vermifugos',
+          style: TextStyle(fontSize: 48),
+        ),
+        SizedBox(height: 30),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Invermectina',
+          sized: 40,
+        ),
+        SizedBox(height: 20,),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Invermectina',
+          sized: 40,
+        ),
+        SizedBox(height: 20,),
+        FieldWidgets(
+          value1: pet.DateOfBirthPet,
+          value2: 'Invermectina',
+          sized: 40,
+        ),
+      ],
     );
   }
 
