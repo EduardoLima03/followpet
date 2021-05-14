@@ -63,8 +63,8 @@
 }
 
 .u-section-1 .u-image-1 {
-  width: 341px;
-  height: 543px;
+  width: auto;
+  height: auto;
   margin: 0 auto 0 97px;
 }
 
@@ -105,7 +105,7 @@
   }
 
   .u-section-1 .u-image-1 {
-    height: 542px;
+    height: auto;
   }
 }
 
@@ -157,8 +157,8 @@
   }
 
   .u-section-1 .u-image-1 {
-    width: 336px;
-    height: 534px;
+    width: auto;
+    height: auto;
     margin-left: 0;
   }
 }
@@ -232,7 +232,7 @@
   }
 
   .u-section-1 .u-image-1 {
-    width: 320px;
-    height: 509px;
+    width: auto;
+    height: auto;
   }
 }
