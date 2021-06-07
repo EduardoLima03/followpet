@@ -15,11 +15,23 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   DatabaseHelper db = DatabaseHelper();
+  final _detailsKey = GlobalKey<FormState>();
+
+  @override
+  initState() {
+    _durationAlert().then((value){
+      _actionBar(title: 'pesquisa', url: "dsfsdfsdfsfs", context: _detailsKey.currentState.context);
+    });
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     final PetModel _petInfo = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
+      key: _detailsKey,
+      backgroundColor:  Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: Text(titlePageDetails),
         actions: [
@@ -27,16 +39,14 @@ class _DetailsPageState extends State<DetailsPage> {
               icon: Icon(Icons.edit),
               onPressed: () {
                 _actionBar(
-                    context: context,
-                    mensagem: titleAlertUpdate,
-                    petU: _petInfo);
+                    context: context, title: titleAlertUpdate, petU: _petInfo);
               }),
           IconButton(
             icon: Icon(Icons.delete),
             onPressed: () {
               _actionBar(
                   context: context,
-                  mensagem: titleAlertDelete,
+                  title: titleAlertDelete,
                   id: _petInfo.IdPet);
             },
           ),
@@ -57,7 +67,14 @@ class _DetailsPageState extends State<DetailsPage> {
       }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: null,
+        onPressed: () {
+          _actionBar(
+              context: context,
+              title: 'Pesquisa',
+              message:
+                  'Ao clicar em sim voce será direcionado para o formulario de pesquisa',
+              url: 'https://eduardolima03.github.io/followpet/');
+        },
       ),
     );
   }
@@ -109,7 +126,7 @@ class _DetailsPageState extends State<DetailsPage> {
             thickness: 1,
           ),
         ),
-        // TODO start section vaccine
+        // start section vaccine
         Text(
           'Vacinas',
           style: TextStyle(fontSize: 20),
@@ -133,7 +150,7 @@ class _DetailsPageState extends State<DetailsPage> {
           sized: 18,
         ),
         // end section vaccine
-        //TODO start section vermifuge
+        //start section vermifuge
         Container(
           child: Divider(
             height: 30,
@@ -151,13 +168,17 @@ class _DetailsPageState extends State<DetailsPage> {
           value2: 'Invermectina',
           sized: 18,
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         FieldWidgets(
           value1: pet.DateOfBirthPet,
           value2: 'Invermectina',
           sized: 18,
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         FieldWidgets(
           value1: pet.DateOfBirthPet,
           value2: 'Invermectina',
@@ -214,7 +235,7 @@ class _DetailsPageState extends State<DetailsPage> {
             thickness: 1,
           ),
         ),
-        // TODO start section vaccine
+        // start section vaccine
         Text(
           'Vacinas',
           style: TextStyle(fontSize: 30),
@@ -238,7 +259,7 @@ class _DetailsPageState extends State<DetailsPage> {
           sized: 20,
         ),
         // end section vaccine
-        //TODO start section vermifuge
+        //start section vermifuge
         Container(
           child: Divider(
             height: 30,
@@ -256,13 +277,17 @@ class _DetailsPageState extends State<DetailsPage> {
           value2: 'Invermectina',
           sized: 20,
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         FieldWidgets(
           value1: pet.DateOfBirthPet,
           value2: 'Invermectina',
           sized: 20,
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         FieldWidgets(
           value1: pet.DateOfBirthPet,
           value2: 'Invermectina',
@@ -319,7 +344,7 @@ class _DetailsPageState extends State<DetailsPage> {
             thickness: 1,
           ),
         ),
-        // TODO start section vaccine
+        // start section vaccine
         Text(
           'Vacinas',
           style: TextStyle(fontSize: 38),
@@ -343,7 +368,7 @@ class _DetailsPageState extends State<DetailsPage> {
           sized: 30,
         ),
         // end section vaccine
-        //TODO start section vermifuge
+        //start section vermifuge
         Container(
           child: Divider(
             height: 30,
@@ -361,13 +386,17 @@ class _DetailsPageState extends State<DetailsPage> {
           value2: 'Invermectina',
           sized: 30,
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         FieldWidgets(
           value1: pet.DateOfBirthPet,
           value2: 'Invermectina',
           sized: 30,
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         FieldWidgets(
           value1: pet.DateOfBirthPet,
           value2: 'Invermectina',
@@ -425,7 +454,7 @@ class _DetailsPageState extends State<DetailsPage> {
             thickness: 1,
           ),
         ),
-        // TODO start section vaccine
+        //start section vaccine
         Text(
           'Vacinas',
           style: TextStyle(fontSize: 48),
@@ -449,7 +478,7 @@ class _DetailsPageState extends State<DetailsPage> {
           sized: 40,
         ),
         // end section vaccine
-        //TODO start section vermifuge
+        //start section vermifuge
         Container(
           child: Divider(
             height: 30,
@@ -467,13 +496,17 @@ class _DetailsPageState extends State<DetailsPage> {
           value2: 'Invermectina',
           sized: 40,
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         FieldWidgets(
           value1: pet.DateOfBirthPet,
           value2: 'Invermectina',
           sized: 40,
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         FieldWidgets(
           value1: pet.DateOfBirthPet,
           value2: 'Invermectina',
@@ -495,12 +528,39 @@ class _DetailsPageState extends State<DetailsPage> {
 
   /// Esse metodo será responsavel por exibir o alert ao usuario perguntado
   /// se ela deseja deleta o pet
-  _actionBar({BuildContext context, String mensagem, int id, PetModel petU}) {
+  _actionBar(
+      {BuildContext context,
+      String title,
+      int id,
+      PetModel petU,
+      String url,
+      String message}) {
+    if (url != null) {
+      return showDialog(
+          context: this.context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(title),
+              content: Text(message),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(titleButtonRefuse)),
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(titleButtonConfirms)),
+              ],
+            );
+          });
+    }
+
     return showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(mensagem),
+            title: Text(title),
             actions: [
               TextButton(
                   onPressed: () => Navigator.of(context).pop(),
@@ -525,4 +585,8 @@ class _DetailsPageState extends State<DetailsPage> {
         });
   }
   //fim do ShowDialog
+
+  Future _durationAlert() async {
+    await Future.delayed(Duration(milliseconds: 3000), () {});
+  }
 }

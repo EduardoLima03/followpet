@@ -33,6 +33,7 @@ class _FormPetPageState extends State<FormPetPage> {
       });
     }
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: Text(_petInfo != null ? titlePageUpdates : titlePageRegister),
       ),
