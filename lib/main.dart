@@ -15,17 +15,24 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'FollowPet Alfa',
       theme: ThemeData(
+        brightness: Brightness.light,
         primaryColor: primary,
         accentColor: fourth,
         backgroundColor: gray50,
+        cardTheme: CardTheme(shadowColor: gray50),
+        textTheme: TextTheme(bodyText2: TextStyle(color: primary)),
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        accentColor: second,
+        textTheme: TextTheme(bodyText2: TextStyle(color: second)),
       ),
       initialRoute: '/',
       routes: {
-        '/' : (context) => SplashScreenPage(),
+        '/': (context) => SplashScreenPage(),
         '/home': (context) => HomePage(),
         '/form': (context) => FormPetPage(),
         '/details': (context) => DetailsPage(),
-
       },
     );
   }

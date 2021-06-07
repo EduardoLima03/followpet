@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
   Widget layoutSm() {
     if (_pets.length > 0) {
       return ListView.builder(
-          padding: EdgeInsets.all(24.0),
+          padding: EdgeInsets.only(left:33.00, right: 33.00,top: 10.0),
           itemCount: _pets.length,
           itemBuilder: (context, index) {
             return CardWidgets(
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
     } else {
       return Center(
         child: Padding(
-          padding: EdgeInsets.all(24.00),
+          padding: EdgeInsets.only(left:33.00, right: 33.00),
           child: Text('Não tem pet cadastrado!!. '
               'aperte no botão para cadastra agora'),
         ),
