@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:followpet_alfa/utils/colors.dart';
 
 class FieldWidgets extends StatelessWidget {
   String value1;
@@ -27,7 +27,7 @@ class FieldWidgets extends StatelessWidget {
                   this.label1,
                   style: TextStyle(
                       fontSize: this.sized - 4,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).textTheme.bodyText1.color,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -37,6 +37,7 @@ class FieldWidgets extends StatelessWidget {
                   this.value1,
                   style: TextStyle(
                     fontSize: sized,
+                    color: Theme.of(context).textTheme.bodyText1.color,
                   ),
                 ),
               ],
@@ -44,7 +45,7 @@ class FieldWidgets extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  color: Theme.of(context).primaryColor,
+                  color: primary,
                   width: 2,
                 ),
               ),
@@ -69,6 +70,7 @@ class FieldWidgets extends StatelessWidget {
                 Text(
                   this.value2,
                   style: TextStyle(
+                    color: Colors.white38,
                     fontSize: sized,
                   ),
                 ),
@@ -77,7 +79,7 @@ class FieldWidgets extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  color: Theme.of(context).primaryColor,
+                  color: Colors.white,
                   width: 2,
                 ),
               ),
@@ -93,12 +95,14 @@ class FieldWidgets extends StatelessWidget {
             width: sized * 6.4,
             child: Text(
               value1,
-              style: TextStyle(fontSize: sized),
+              style: TextStyle(
+                  fontSize: sized,
+                  color: Theme.of(context).textTheme.bodyText1.color),
             ),
             decoration: BoxDecoration(
               border: Border(
                 bottom:
-                BorderSide(color: Theme.of(context).primaryColor, width: 2),
+                    BorderSide(color: Theme.of(context).dividerColor, width: 2),
               ),
             ),
           ),
@@ -106,12 +110,11 @@ class FieldWidgets extends StatelessWidget {
             width: sized * 6.4,
             child: Text(
               value2,
-              style: TextStyle(fontSize: sized),
+              style: TextStyle(fontSize: sized, color: Theme.of(context).textTheme.bodyText1.color),
             ),
             decoration: BoxDecoration(
               border: Border(
-                bottom:
-                BorderSide(color: Theme.of(context).primaryColor, width: 2),
+                bottom: BorderSide(color: Theme.of(context).dividerColor, width: 2),
               ),
             ),
           ),

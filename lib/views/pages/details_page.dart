@@ -18,22 +18,14 @@ class _DetailsPageState extends State<DetailsPage> {
   final _detailsKey = GlobalKey<FormState>();
 
   @override
-  initState() {
-    _durationAlert().then((value){
-      _actionBar(title: 'pesquisa', url: "dsfsdfsdfsfs", context: _detailsKey.currentState.context);
-    });
-    
-  }
-
-  @override
   Widget build(BuildContext context) {
     final PetModel _petInfo = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       key: _detailsKey,
-      backgroundColor:  Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Text(titlePageDetails),
+        title: Text(titlePageDetails+ ' - ' + _petInfo.NamePet),
         actions: [
           IconButton(
               icon: Icon(Icons.edit),
@@ -92,7 +84,7 @@ class _DetailsPageState extends State<DetailsPage> {
         SizedBox(
           height: 55,
         ),
-        FieldWidgets(
+        /*FieldWidgets(
           label1: 'Nome',
           value1: pet.NamePet,
           label2: 'Data',
@@ -125,11 +117,14 @@ class _DetailsPageState extends State<DetailsPage> {
             color: Colors.grey,
             thickness: 1,
           ),
-        ),
+        ),*/
         // start section vaccine
         Text(
           'Vacinas',
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(
+              fontSize: 20,
+              color: Theme.of(context).textTheme.bodyText1.color,
+              fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 20),
         FieldWidgets(
@@ -151,16 +146,10 @@ class _DetailsPageState extends State<DetailsPage> {
         ),
         // end section vaccine
         //start section vermifuge
-        Container(
-          child: Divider(
-            height: 30,
-            color: Colors.grey,
-            thickness: 1,
-          ),
-        ),
+        SizedBox(height: 50,),
         Text(
           'Vermifugos',
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyText1.color),
         ),
         SizedBox(height: 30),
         FieldWidgets(
@@ -586,7 +575,7 @@ class _DetailsPageState extends State<DetailsPage> {
   }
   //fim do ShowDialog
 
-  Future _durationAlert() async {
+ /* Future _durationAlert() async {
     await Future.delayed(Duration(milliseconds: 3000), () {});
-  }
+  }*/
 }

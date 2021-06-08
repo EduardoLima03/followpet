@@ -19,13 +19,20 @@ class MyApp extends StatelessWidget {
         primaryColor: primary,
         accentColor: fourth,
         backgroundColor: gray50,
+        dividerColor: primary,
         cardTheme: CardTheme(shadowColor: gray50),
-        textTheme: TextTheme(bodyText2: TextStyle(color: primary)),
+        textTheme: TextTheme(
+            bodyText1: TextStyle(color: Colors.black),
+            bodyText2: TextStyle(color: primary)),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         accentColor: second,
-        textTheme: TextTheme(bodyText2: TextStyle(color: second)),
+        dividerColor: primary,
+        textTheme: TextTheme(
+          bodyText1: TextStyle(color: Colors.white),
+          bodyText2: TextStyle(color: second),
+        ),
       ),
       initialRoute: '/',
       routes: {

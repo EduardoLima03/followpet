@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:followpet_alfa/model/pet_model.dart';
-import 'package:followpet_alfa/utils/colors.dart';
 import 'package:followpet_alfa/utils/images.dart';
 
 // ignore: must_be_immutable
