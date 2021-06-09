@@ -63,8 +63,7 @@ class _FormPetPageState extends State<FormPetPage> {
             pet.GenderPet = _genderDelectedValue;
             pet.IdPet = _petInfo.IdPet;
             db.update(pet).then((value) {
-              if (value > 0)
-                showAlertDialog(context, messageAlertUpd);
+              if (value > 0) showAlertDialog(context, messageAlertUpd);
             });
           } else {
             /// se não receber o pet, sera um no entao insert
@@ -227,6 +226,41 @@ class _FormPetPageState extends State<FormPetPage> {
                   return null;
                 },
                 onSaved: (newValue) => pet.BreedPet = newValue,
+              ),
+              SizedBox(
+                height: 17,
+              ),
+              ElevatedButton(
+                onPressed: (){
+                  _formkey.currentState.validate();
+          if (_specieDelectedValue.isEmpty || _genderDelectedValue.isEmpty) {
+            log("nao salvo", name: "validação");
+          } else if (recPet!= null) {
+            ///se a tela receber um pet o update do animal
+            _formkey.currentState.save();
+            pet.SpeciePet = _specieDelectedValue;
+            pet.GenderPet = _genderDelectedValue;
+            pet.IdPet = recPet.IdPet;
+            db.update(pet).then((value) {
+              if (value > 0) showAlertDialog(context, messageAlertUpd);
+            });
+          } else {
+            /// se não receber o pet, sera um no entao insert
+            _formkey.currentState.save();
+            pet.SpeciePet = _specieDelectedValue;
+            pet.GenderPet = _genderDelectedValue;
+
+            db.insert(pet).then((value) {
+              pet.IdPet = value;
+              if (value > 0) showAlertDialog(context, messageAlertNew);
+            });
+          }
+                },
+                child: Text("Salva"),
+                style: ElevatedButton.styleFrom(
+                    minimumSize: Size(150, 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30))),
               ),
             ],
           ),
@@ -725,7 +759,11 @@ class _FormPetPageState extends State<FormPetPage> {
   //fim do LayoutXL
 
   Widget layoutDefult() {
-    return Container(child: Center(child: Text(layoutDefultM),),);
+    return Container(
+      child: Center(
+        child: Text(layoutDefultM),
+      ),
+    );
   }
   //fim do LayoutDefult
 

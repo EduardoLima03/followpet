@@ -22,8 +22,12 @@ class MyApp extends StatelessWidget {
         dividerColor: primary,
         cardTheme: CardTheme(shadowColor: gray50),
         textTheme: TextTheme(
-            bodyText1: TextStyle(color: Colors.black),
-            bodyText2: TextStyle(color: primary)),
+          bodyText1: TextStyle(color: Colors.black),
+          bodyText2: TextStyle(color: primary),
+          headline6: TextStyle(color: primary),
+          headline5: TextStyle(color: second),
+          headline3: TextStyle(color: Colors.white60)
+        ),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
@@ -32,6 +36,9 @@ class MyApp extends StatelessWidget {
         textTheme: TextTheme(
           bodyText1: TextStyle(color: Colors.white),
           bodyText2: TextStyle(color: second),
+          headline6: TextStyle(color: primary),
+          headline5: TextStyle(color: second),
+          headline3: TextStyle(color: Colors.white60)
         ),
       ),
       initialRoute: '/',

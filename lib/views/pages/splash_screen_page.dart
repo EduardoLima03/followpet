@@ -44,7 +44,6 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -56,7 +55,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
               children: [
                 Text('Follow',
                   style: TextStyle(
-                    color: Theme.of(context).primaryColor,
+                    color: primary,
                     fontSize: 40.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -72,7 +71,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
             ),
             Text('Controle as vacinas de seus pets',
               style: TextStyle(
-                color: Colors.black,
+                color: Theme.of(context).textTheme.bodyText1.color,
               ),
             ),
             SizedBox(height: 50,),
