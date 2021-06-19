@@ -3,6 +3,7 @@ import 'package:followpet_alfa/data/database_helper.dart';
 import 'package:followpet_alfa/model/pet_model.dart'; 
 import 'package:followpet_alfa/utils/strings/pt_br.dart';
 import 'package:followpet_alfa/views/widgets/card_widgets.dart';
+import 'package:followpet_alfa/views/widgets/drawer_widgets.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(titlePageHome),
       ),
+      drawer: DrawerWidgets(),
       body: LayoutBuilder(builder: (context, constraints) {
         if (constraints.maxWidth < 600) {
           return layoutSm();
