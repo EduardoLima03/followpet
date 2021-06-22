@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:followpet_alfa/data/database_helper.dart';
 import 'package:followpet_alfa/utils/colors.dart';
 import 'package:followpet_alfa/utils/images.dart';
@@ -48,7 +49,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(LOGO),
+            SvgPicture.asset(LOGO, width: 181.0, height: 181.0,),
             SizedBox(height: 28.0,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

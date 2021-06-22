@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:followpet_alfa/model/pet_model.dart';
 import 'package:followpet_alfa/utils/images.dart';
 
@@ -46,7 +47,7 @@ class _CardState extends State<CardWidgets> {
               Container(
                 height: 138,
                 width: 138,
-                child: Image.asset(
+                child: SvgPicture.asset(
                     widget.pet.SpeciePet == 'dog' ? ICONDOG : ICONCAT),
               ),
               SizedBox(
