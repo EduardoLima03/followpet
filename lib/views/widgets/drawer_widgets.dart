@@ -18,20 +18,35 @@ class DrawerWidgets extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 80.0,
-                    width: 80.0,
+                    height: 83.0,
+                    width: 83.0,
                     child: SvgPicture.asset(ICONPERSON),
+                  ),
+                  SizedBox(
+                    height: 13,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text("Alfa Test"), Text("alfa@followpet.br")],
+                    children: [
+                      Text(
+                        "Alfa Test",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      Text(
+                        "alfa@followpet.br",
+                        style: TextStyle(fontSize: 16),
+                      )
+                    ],
                   ),
                 ],
               ),
             ),
           ),
           ListTile(
-            title: Text("Avalie!"),
+            title: Text(
+              "Avalie!",
+              style: TextStyle(fontSize: 16),
+            ),
             onTap: null,
           ),
         ],

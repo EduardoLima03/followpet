@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:followpet_alfa/data/database_helper.dart';
 import 'package:followpet_alfa/model/pet_model.dart';
 import 'package:followpet_alfa/utils/images.dart';
@@ -79,7 +80,7 @@ class _DetailsPageState extends State<DetailsPage> {
         Container(
           width: 159.0,
           height: 159.0,
-          child: Image.asset(pet.SpeciePet == 'dog' ? ICONDOG : ICONCAT),
+          child: SvgPicture.asset(pet.SpeciePet == 'dog' ? ICONDOG : ICONCAT),
         ),
         SizedBox(
           height: 55,
@@ -185,7 +186,7 @@ class _DetailsPageState extends State<DetailsPage> {
         Container(
           width: 180.0,
           height: 180.0,
-          child: Image.asset(pet.SpeciePet == 'dog' ? ICONDOG : ICONCAT),
+          child: SvgPicture.asset(pet.SpeciePet == 'dog' ? ICONDOG : ICONCAT),
         ),
         SizedBox(
           height: 55,
@@ -294,7 +295,7 @@ class _DetailsPageState extends State<DetailsPage> {
         Container(
           width: 250.0,
           height: 250.0,
-          child: Image.asset(pet.SpeciePet == 'dog' ? ICONDOG : ICONCAT),
+          child: SvgPicture.asset(pet.SpeciePet == 'dog' ? ICONDOG : ICONCAT),
         ),
         SizedBox(
           height: 55,
@@ -404,7 +405,7 @@ class _DetailsPageState extends State<DetailsPage> {
         Container(
           width: 450.0,
           height: 450.0,
-          child: Image.asset(pet.SpeciePet == 'dog' ? ICONDOG : ICONCAT),
+          child: SvgPicture.asset(pet.SpeciePet == 'dog' ? ICONDOG : ICONCAT),
         ),
         SizedBox(
           height: 55,
