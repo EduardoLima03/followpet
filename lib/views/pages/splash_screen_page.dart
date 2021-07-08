@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:followpet_alfa/data/database_helper.dart';
 import 'package:followpet_alfa/utils/colors.dart';
 import 'package:followpet_alfa/utils/images.dart';
+import 'package:followpet_alfa/utils/version_code_si.dart';
+import 'package:package_info/package_info.dart';
 
 class SplashScreenPage extends StatefulWidget {
   @override
@@ -13,15 +15,37 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   DatabaseHelper db = DatabaseHelper();
   int numberPet;
 
+  VersionCodeSi _versionCodeSi = VersionCodeSi();// para manipular aa versao
+  
+
+  ///informaçoes da versao
+  PackageInfo _packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+  );
+
   @override
   // ignore: must_call_super
   initState() {
+    _initPackageInfo();
     db.getNumber().then((value) {
       numberPet = value;
     });
 
     _durationPage().then((value) {
       value != false ? _navigatorHome() : _navigatorCreatePet();
+    });
+  }
+
+  Future<void> _initPackageInfo() async {
+    final PackageInfo info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
+      String vers = info.version.toString();// vers vai receber o campo de versao do projeto
+      if(vers.isNotEmpty)// se ela nao tiver vazia vai ser salva no sigleton
+        _versionCodeSi.Version = vers;
     });
   }
 
@@ -76,7 +100,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
               ),
             ),
             SizedBox(height: 50,),
-            Text('Alfa',
+            Text('${_versionCodeSi.Version} Alfa',
             style: TextStyle(
               color: fourth,
               fontSize: 40.0,

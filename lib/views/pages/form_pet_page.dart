@@ -6,6 +6,7 @@ import 'package:followpet_alfa/data/database_helper.dart';
 import 'package:followpet_alfa/model/pet_model.dart';
 import 'package:followpet_alfa/utils/images.dart';
 import 'package:followpet_alfa/utils/strings/pt_br.dart';
+import 'package:followpet_alfa/views/widgets/picture_widgets.dart';
 
 class FormPetPage extends StatefulWidget {
   @override
@@ -90,15 +91,17 @@ class _FormPetPageState extends State<FormPetPage> {
           key: _formkey,
           child: Column(
             children: [
-              Container(
-                height: 138,
-                width: 138,
-                child: SvgPicture.asset(recPet != null
-                    ? _specieDelectedValue == "dog"
-                        ? ICONDOG
-                        : ICONCAT
-                    : ICONPHOTO),
-              ),
+              /// TODO refazer o teste de icone
+              /// no lugar do familia é para saber se objeto tem foto, a foto de ser
+              /// inserida na hora de salvar, se nao tive foto, sava o icon da familia
+              PictureWidgets(
+                  138,
+                  138,
+                  recPet != null
+                      ? _specieDelectedValue == "dog"
+                          ? ICONDOG
+                          : ICONCAT
+                      : ICONPHOTO),
               SizedBox(
                 height: 60,
               ),
@@ -355,15 +358,16 @@ class _FormPetPageState extends State<FormPetPage> {
 
   Widget layoutMd(PetModel recPet) {
     return ListView(
-      padding: EdgeInsets.only(top: 30.0, left: 24.0, right: 24.0),
+      padding: EdgeInsets.only(top: 65.0, left: 80.0, right: 80.0),
       children: [
         Form(
           key: _formkey,
           child: Column(
             children: [
+              Text("Layout MD"),
               Container(
-                height: 160,
-                width: 160,
+                height: 200,
+                width: 200,
                 child: SvgPicture.asset(recPet != null
                     ? _specieDelectedValue == "dog"
                         ? ICONDOG
@@ -389,6 +393,9 @@ class _FormPetPageState extends State<FormPetPage> {
                   return null;
                 },
                 onSaved: (value) => pet.NamePet = value,
+              ),
+              SizedBox(
+                height: 16,
               ),
               TextFormField(
                 controller: _controllerDate,
@@ -420,7 +427,7 @@ class _FormPetPageState extends State<FormPetPage> {
                 },
               ),
               SizedBox(
-                height: 15.0,
+                height: 16.0,
               ),
               Container(
                 child: Column(
@@ -446,6 +453,7 @@ class _FormPetPageState extends State<FormPetPage> {
                         Text(
                           "Dog",
                           style: TextStyle(
+                              fontSize: 16,
                               color:
                                   Theme.of(context).textTheme.bodyText1.color),
                         ),
@@ -462,6 +470,7 @@ class _FormPetPageState extends State<FormPetPage> {
                         Text(
                           "Cat",
                           style: TextStyle(
+                              fontSize: 16,
                               color:
                                   Theme.of(context).textTheme.bodyText1.color),
                         ),
@@ -471,7 +480,7 @@ class _FormPetPageState extends State<FormPetPage> {
                 ),
               ),
               SizedBox(
-                height: 15.0,
+                height: 16.0,
               ),
               Container(
                 child: Column(
@@ -497,6 +506,7 @@ class _FormPetPageState extends State<FormPetPage> {
                         Text(
                           famale,
                           style: TextStyle(
+                              fontSize: 16,
                               color:
                                   Theme.of(context).textTheme.bodyText1.color),
                         ),
@@ -513,6 +523,7 @@ class _FormPetPageState extends State<FormPetPage> {
                         Text(
                           male,
                           style: TextStyle(
+                              fontSize: 16,
                               color:
                                   Theme.of(context).textTheme.bodyText1.color),
                         ),
@@ -522,6 +533,9 @@ class _FormPetPageState extends State<FormPetPage> {
                 ),
               ),
               // fim dos radio
+              SizedBox(
+                height: 16,
+              ),
               Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -530,7 +544,8 @@ class _FormPetPageState extends State<FormPetPage> {
                     Text(
                       fieldLabelBreed,
                       style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
                           color: Theme.of(context).textTheme.bodyText1.color),
                     ),
                     Row(
@@ -565,12 +580,6 @@ class _FormPetPageState extends State<FormPetPage> {
                               labelText: "Breend 2",
                               focusColor: Theme.of(context).accentColor,
                             ),
-                            validator: (value) {
-                              if (value.isEmpty) return fieldValidationM;
-
-                              return null;
-                            },
-                            onSaved: (newValue) => pet.BreedPet = newValue,
                           ),
                         ),
                       ],
@@ -579,7 +588,7 @@ class _FormPetPageState extends State<FormPetPage> {
                 ),
               ),
               SizedBox(
-                height: 17,
+                height: 20,
               ),
               ElevatedButton(
                 onPressed: () {

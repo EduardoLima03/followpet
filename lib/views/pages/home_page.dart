@@ -4,6 +4,7 @@ import 'package:followpet_alfa/model/pet_model.dart';
 import 'package:followpet_alfa/utils/strings/pt_br.dart';
 import 'package:followpet_alfa/views/widgets/card_widgets.dart';
 import 'package:followpet_alfa/views/widgets/drawer_widgets.dart';
+import 'package:package_info/package_info.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,7 +18,22 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    _initPackageInfo();
     _getAllPets();
+  }
+
+  ///informaçoes da versao
+  PackageInfo _packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+  );
+  Future<void> _initPackageInfo() async {
+    final PackageInfo info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
+    });
   }
 
   @override
@@ -27,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(titlePageHome),
       ),
-      drawer: DrawerWidgets(),
+      drawer: DrawerWidgets(_packageInfo.version),
       body: LayoutBuilder(builder: (context, constraints) {
         if (constraints.maxWidth < 600) {
           return layoutSm();

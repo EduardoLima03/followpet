@@ -2,8 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:followpet_alfa/utils/images.dart';
+import 'package:followpet_alfa/utils/version_code_si.dart';
 
 class DrawerWidgets extends StatelessWidget {
+  String _version;
+  DrawerWidgets(this._version);
+
+  VersionCodeSi versionCodeSi = VersionCodeSi();
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -48,6 +54,12 @@ class DrawerWidgets extends StatelessWidget {
               style: TextStyle(fontSize: 16),
             ),
             onTap: null,
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Text(versionCodeSi.Version),
+            ),
           ),
         ],
       ),

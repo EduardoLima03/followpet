@@ -32,6 +32,9 @@ dependencies:
   sqflite: ^2.0.0+3
   path_provider: ^1.6.7
 
+  # Controle de versao
+  package_info: ^2.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
