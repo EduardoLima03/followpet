@@ -58,7 +58,10 @@ class DrawerWidgets extends StatelessWidget {
           Expanded(
             child: Align(
               alignment: Alignment.bottomRight,
-              child: Text(versionCodeSi.Version),
+              child: Text(
+                'Versão ${versionCodeSi.Version}',
+                style: TextStyle(color: Colors.grey),
+              ),
             ),
           ),
         ],

@@ -1,16 +1,14 @@
 # followpet_alfa
 
-A new Flutter project.
+Projeto desenvolvido para aprendizagem do framework Flutter e Banco de dados.
 
-## Getting Started
+O app tem a função de cadastra e controlar as vacinas que o animal de estimação pode receber em toda sua vida.
 
-This project is a starting point for a Flutter application.
+## Atualizações
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+###### Versão 1.1.5
+* Tema Dark.
+* Melhorias nas telas.
+* Utilização de arquivos Svg como imagens internar, possibilitando um dimensionamento adequando para cada tela.
+* Criação de Drawer personalizado.
+* Utilizando o pacote package_info para informa a versão do projeto.
