@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:followpet_alfa/data/database_helper.dart';
-import 'package:followpet_alfa/model/pet_model.dart';
+import 'package:followpet_alfa/model/pet_model.dart'; 
 import 'package:followpet_alfa/utils/strings/pt_br.dart';
 import 'package:followpet_alfa/views/widgets/card_widgets.dart';
+import 'package:followpet_alfa/views/widgets/drawer_widgets.dart';
+import 'package:package_info/package_info.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,15 +18,32 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    _initPackageInfo();
     _getAllPets();
+  }
+
+  ///informaçoes da versao
+  PackageInfo _packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+  );
+  Future<void> _initPackageInfo() async {
+    final PackageInfo info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: Text(titlePageHome),
       ),
+      drawer: DrawerWidgets(_packageInfo.version),
       body: LayoutBuilder(builder: (context, constraints) {
         if (constraints.maxWidth < 600) {
           return layoutSm();
@@ -50,7 +69,7 @@ class _HomePageState extends State<HomePage> {
   Widget layoutSm() {
     if (_pets.length > 0) {
       return ListView.builder(
-          padding: EdgeInsets.all(24.0),
+          padding: EdgeInsets.only(left:33.00, right: 33.00,top: 10.0),
           itemCount: _pets.length,
           itemBuilder: (context, index) {
             return CardWidgets(
@@ -59,7 +78,7 @@ class _HomePageState extends State<HomePage> {
     } else {
       return Center(
         child: Padding(
-          padding: EdgeInsets.all(24.00),
+          padding: EdgeInsets.only(left:33.00, right: 33.00),
           child: Text('Não tem pet cadastrado!!. '
               'aperte no botão para cadastra agora'),
         ),

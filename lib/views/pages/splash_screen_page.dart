@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:followpet_alfa/data/database_helper.dart';
-import 'package:followpet_alfa/model/pet_model.dart';
 import 'package:followpet_alfa/utils/colors.dart';
 import 'package:followpet_alfa/utils/images.dart';
+import 'package:followpet_alfa/utils/version_code_si.dart';
+import 'package:package_info/package_info.dart';
 
 class SplashScreenPage extends StatefulWidget {
   @override
@@ -13,15 +15,37 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   DatabaseHelper db = DatabaseHelper();
   int numberPet;
 
+  VersionCodeSi _versionCodeSi = VersionCodeSi();// para manipular aa versao
+  
+
+  ///informaçoes da versao
+  PackageInfo _packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+  );
+
   @override
   // ignore: must_call_super
   initState() {
+    _initPackageInfo();
     db.getNumber().then((value) {
       numberPet = value;
     });
 
     _durationPage().then((value) {
       value != false ? _navigatorHome() : _navigatorCreatePet();
+    });
+  }
+
+  Future<void> _initPackageInfo() async {
+    final PackageInfo info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
+      String vers = info.version.toString();// vers vai receber o campo de versao do projeto
+      if(vers.isNotEmpty)// se ela nao tiver vazia vai ser salva no sigleton
+        _versionCodeSi.Version = vers;
     });
   }
 
@@ -45,19 +69,18 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(LOGO),
+            SvgPicture.asset(LOGO, width: 181.0, height: 181.0,),
             SizedBox(height: 28.0,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Follow',
                   style: TextStyle(
-                    color: Theme.of(context).primaryColor,
+                    color: primary,
                     fontSize: 40.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -73,11 +96,11 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
             ),
             Text('Controle as vacinas de seus pets',
               style: TextStyle(
-                color: Colors.black,
+                color: Theme.of(context).textTheme.bodyText1.color,
               ),
             ),
             SizedBox(height: 50,),
-            Text('Alfa',
+            Text('${_versionCodeSi.Version} Alfa',
             style: TextStyle(
               color: fourth,
               fontSize: 40.0,
