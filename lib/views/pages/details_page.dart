@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:followpet_alfa/data/database_helper.dart';
-import 'package:followpet_alfa/model/pet_model.dart';
+import 'package:followpet_alfa/database/sqlite/dao/impl/pet_dao_impl.dart';
+import 'package:followpet_alfa/model/entities/pet_model.dart';
 import 'package:followpet_alfa/utils/images.dart';
 import 'package:followpet_alfa/utils/strings/pt_br.dart';
 import 'package:followpet_alfa/views/widgets/field_widgets.dart';
@@ -15,7 +15,7 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  DatabaseHelper db = DatabaseHelper();
+  //DatabaseHelper db = DatabaseHelper();
   final _detailsKey = GlobalKey<FormState>();
 
   @override
@@ -26,7 +26,7 @@ class _DetailsPageState extends State<DetailsPage> {
       key: _detailsKey,
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Text(titlePageDetails+ ' - ' + _petInfo.NamePet),
+        title: Text(titlePageDetails + ' - ' + _petInfo.NamePet),
         actions: [
           IconButton(
               icon: Icon(Icons.edit),
@@ -147,10 +147,15 @@ class _DetailsPageState extends State<DetailsPage> {
         ),
         // end section vaccine
         //start section vermifuge
-        SizedBox(height: 50,),
+        SizedBox(
+          height: 50,
+        ),
         Text(
           'Vermifugos',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyText1.color),
+          style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).textTheme.bodyText1.color),
         ),
         SizedBox(height: 30),
         FieldWidgets(
@@ -558,7 +563,7 @@ class _DetailsPageState extends State<DetailsPage> {
               TextButton(
                   onPressed: () {
                     if (id != null) {
-                      db.delete(id).then((value) {
+                      PetDaoImpl().deleteById(id).then((value) {
                         if (value > 0) {
                           Navigator.popAndPushNamed(context, '/home',
                               result: value);
@@ -576,7 +581,7 @@ class _DetailsPageState extends State<DetailsPage> {
   }
   //fim do ShowDialog
 
- /* Future _durationAlert() async {
+  /* Future _durationAlert() async {
     await Future.delayed(Duration(milliseconds: 3000), () {});
   }*/
 }

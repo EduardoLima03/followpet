@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:followpet_alfa/data/database_helper.dart';
+import 'package:followpet_alfa/database/sqlite/dao/impl/pet_dao_impl.dart';
 import 'package:followpet_alfa/utils/colors.dart';
 import 'package:followpet_alfa/utils/images.dart';
 import 'package:followpet_alfa/utils/version_code_si.dart';
@@ -12,11 +12,10 @@ class SplashScreenPage extends StatefulWidget {
 }
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
-  DatabaseHelper db = DatabaseHelper();
+  //DatabaseHelper db = DatabaseHelper();
   int numberPet;
 
-  VersionCodeSi _versionCodeSi = VersionCodeSi();// para manipular aa versao
-  
+  VersionCodeSi _versionCodeSi = VersionCodeSi(); // para manipular aa versao
 
   ///informaçoes da versao
   PackageInfo _packageInfo = PackageInfo(
@@ -30,7 +29,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   // ignore: must_call_super
   initState() {
     _initPackageInfo();
-    db.getNumber().then((value) {
+    PetDaoImpl().totalRecord().then((value) {
       numberPet = value;
     });
 
@@ -43,26 +42,27 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     final PackageInfo info = await PackageInfo.fromPlatform();
     setState(() {
       _packageInfo = info;
-      String vers = info.version.toString();// vers vai receber o campo de versao do projeto
-      if(vers.isNotEmpty)// se ela nao tiver vazia vai ser salva no sigleton
+      String vers = info.version
+          .toString(); // vers vai receber o campo de versao do projeto
+      if (vers.isNotEmpty) // se ela nao tiver vazia vai ser salva no sigleton
         _versionCodeSi.Version = vers;
     });
   }
 
-  Future<bool> _durationPage() async{
+  Future<bool> _durationPage() async {
     await Future.delayed(Duration(milliseconds: 3000), () {});
-    
+
     /// vai retorna true se exisite pet no banco de dados
     /// false se nao existir
-    
-    return numberPet > 0? true: false;
+
+    return numberPet > 0 ? true : false;
   }
 
-  void _navigatorCreatePet(){
+  void _navigatorCreatePet() {
     Navigator.pushNamedAndRemoveUntil(context, '/form', (route) => false);
   }
 
-  void _navigatorHome(){
+  void _navigatorHome() {
     Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
   }
 
@@ -73,19 +73,27 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(LOGO, width: 181.0, height: 181.0,),
-            SizedBox(height: 28.0,),
+            SvgPicture.asset(
+              LOGO,
+              width: 181.0,
+              height: 181.0,
+            ),
+            SizedBox(
+              height: 28.0,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Follow',
+                Text(
+                  'Follow',
                   style: TextStyle(
                     color: primary,
                     fontSize: 40.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text('Pet',
+                Text(
+                  'Pet',
                   style: TextStyle(
                     color: second,
                     fontSize: 40.0,
@@ -94,18 +102,23 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                 ),
               ],
             ),
-            Text('Controle as vacinas de seus pets',
+            Text(
+              'Controle as vacinas de seus pets',
               style: TextStyle(
                 color: Theme.of(context).textTheme.bodyText1.color,
               ),
             ),
-            SizedBox(height: 50,),
-            Text('${_versionCodeSi.Version} Alfa',
-            style: TextStyle(
-              color: fourth,
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold,
-            ),),
+            SizedBox(
+              height: 50,
+            ),
+            Text(
+              '${_versionCodeSi.Version} Alfa',
+              style: TextStyle(
+                color: fourth,
+                fontSize: 40.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
       ),

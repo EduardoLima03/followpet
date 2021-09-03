@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:followpet_alfa/data/database_helper.dart';
-import 'package:followpet_alfa/model/pet_model.dart'; 
+import 'package:followpet_alfa/database/sqlite/dao/impl/pet_dao_impl.dart';
+import 'package:followpet_alfa/model/entities/pet_model.dart';
 import 'package:followpet_alfa/utils/strings/pt_br.dart';
 import 'package:followpet_alfa/views/widgets/card_widgets.dart';
 import 'package:followpet_alfa/views/widgets/drawer_widgets.dart';
@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  DatabaseHelper db = DatabaseHelper();
+  //DatabaseHelper db = DatabaseHelper();
   List<PetModel> _pets = [];
 
   @override
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
   Widget layoutSm() {
     if (_pets.length > 0) {
       return ListView.builder(
-          padding: EdgeInsets.only(left:33.00, right: 33.00,top: 10.0),
+          padding: EdgeInsets.only(left: 33.00, right: 33.00, top: 10.0),
           itemCount: _pets.length,
           itemBuilder: (context, index) {
             return CardWidgets(
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
     } else {
       return Center(
         child: Padding(
-          padding: EdgeInsets.only(left:33.00, right: 33.00),
+          padding: EdgeInsets.only(left: 33.00, right: 33.00),
           child: Text('Não tem pet cadastrado!!. '
               'aperte no botão para cadastra agora'),
         ),
@@ -153,7 +153,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget layoutDefult() {
-    return Container(child: Center(child: Text(layoutDefultM),),);
+    return Container(
+      child: Center(
+        child: Text(layoutDefultM),
+      ),
+    );
   }
 
   /// Codigo presente na aula 104 do curso
@@ -161,32 +165,31 @@ class _HomePageState extends State<HomePage> {
   /// Tem a função de recarregar a lista de pets para ser exibido
   /// posterio a um insert na tela de cadastro
   void _showCadastrapet({PetModel petModel}) async {
-
-    if(petModel != null){
+    if (petModel != null) {
       final recPet =
-        await Navigator.pushNamed(context, '/details', arguments: petModel);
+          await Navigator.pushNamed(context, '/details', arguments: petModel);
       if (recPet != null) {
         /// Sempre averá o retor do pet, sendo novo ou alterado. com
         /// isso a lista de pet sera atualizada
         /*if (petModel != null) {
-          await db.update(recPet);
+          await PetDaoImpl().update(recPet);
 
         }else{
-          await db.insert(recPet);
+          await PetDaoImpl().insert(recPet);
         }*/
         _getAllPets();
       }
-    }else{
+    } else {
       final recPet =
           await Navigator.pushNamed(context, '/form', arguments: petModel);
       if (recPet != null) {
         /// Sempre averá o retor do pet, sendo novo ou alterado. com
         /// isso a lista de pet sera atualizada
         /*if (petModel != null) {
-          await db.update(recPet);
+          await PetDaoImpl().update(recPet);
 
         }else{
-          await db.insert(recPet);
+          await PetDaoImpl().insert(recPet);
         }*/
         _getAllPets();
       }
@@ -194,7 +197,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _getAllPets() {
-    db.getallPet().then((value) {
+    PetDaoImpl().findAll().then((value) {
       setState(() {
         _pets = value;
       });

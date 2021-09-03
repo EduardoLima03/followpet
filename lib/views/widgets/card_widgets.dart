@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:followpet_alfa/model/pet_model.dart';
+import 'package:followpet_alfa/model/entities/pet_model.dart';
 import 'package:followpet_alfa/utils/images.dart';
 
 // ignore: must_be_immutable

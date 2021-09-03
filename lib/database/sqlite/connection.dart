@@ -1,16 +1,12 @@
-import 'dart:developer';
-
-import 'package:followpet_alfa/model/pet_model.dart';
 import 'package:followpet_alfa/utils/attributes_string.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
 
-class DatabaseHelper {
+class Connection {
+  static Database _db; //meu banco de dados
 
-  Database _db; //meu banco de dados
-
-  Future<Database> get db async {
+  static Future<Database> get db async {
     if (_db != null) {
       return _db;
     } else {
@@ -19,7 +15,7 @@ class DatabaseHelper {
     }
   }
 
-  Future<Database> initDb() async {
+  static Future<Database> initDb() async {
     final databasePath = await getDatabasesPath();
     final path = join(databasePath, 'followpetalfa.db');
 
@@ -27,9 +23,9 @@ class DatabaseHelper {
         onCreate: (Database db, int version) async {
       await db.execute(
           "CREATE TABLE IF NOT EXISTS $tablePet ($idPet INTEGER PRIMARY KEY AUTOINCREMENT, "
-              "$namePet TEXT NOT NULL, $birthPet TEXT NOT NULL, "
-              "$genderPet TEXT NOT NULL, $speciePet TEXT NOT NULL, "
-              "$breedPet TEXT NOT NULL)");
+          "$namePet TEXT NOT NULL, $birthPet TEXT NOT NULL, "
+          "$genderPet TEXT NOT NULL, $speciePet TEXT NOT NULL, "
+          "$breedPet TEXT NOT NULL)");
     });
   }
 
@@ -38,7 +34,7 @@ class DatabaseHelper {
     dbPet.close();
   }
 
-  Future<int> delete(int id) async {
+  /* Future<int> delete(int id) async {
     Database dbPet = await db;
     return await dbPet.delete(tablePet, where: '$idPet = ?', whereArgs: [id]);
     //qual valor inteiro ele retorna se a tupla for deletada?
@@ -75,15 +71,16 @@ class DatabaseHelper {
     List listMap = await dbPet.rawQuery("SELECT * FROM $tablePet");
 
     List<PetModel> listPets = [];
-    for(Map m in listMap){
+    for (Map m in listMap) {
       listPets.add(PetModel.fromMap(m));
     }
     return listPets;
   }
 
-  Future<int> getNumber() async{
+  Future<int> getNumber() async {
     Database dbPet = await db;
-    return Sqflite.firstIntValue(await dbPet.rawQuery("SELECT COUNT(*) FROM $tablePet"));
+    return Sqflite.firstIntValue(
+        await dbPet.rawQuery("SELECT COUNT(*) FROM $tablePet"));
   }
 
   Future<int> insert(PetModel pet) async {
@@ -95,5 +92,5 @@ class DatabaseHelper {
       log('erro ao salvar: $e', name: "banco de dados");
       return 0;
     }
-  }
+  }*/
 }

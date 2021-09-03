@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:followpet_alfa/data/database_helper.dart';
-import 'package:followpet_alfa/model/pet_model.dart';
+import 'package:followpet_alfa/database/sqlite/dao/impl/pet_dao_impl.dart';
+import 'package:followpet_alfa/model/entities/pet_model.dart';
 import 'package:followpet_alfa/utils/images.dart';
 import 'package:followpet_alfa/utils/strings/pt_br.dart';
 import 'package:followpet_alfa/views/widgets/picture_widgets.dart';
@@ -14,7 +14,7 @@ class FormPetPage extends StatefulWidget {
 }
 
 class _FormPetPageState extends State<FormPetPage> {
-  DatabaseHelper db = DatabaseHelper();
+  //DatabaseHelper db = DatabaseHelper();
 
   final _formkey = GlobalKey<FormState>();
   PetModel pet = new PetModel.empty();
@@ -64,7 +64,7 @@ class _FormPetPageState extends State<FormPetPage> {
             pet.SpeciePet = _specieDelectedValue;
             pet.GenderPet = _genderDelectedValue;
             pet.IdPet = _petInfo.IdPet;
-            db.update(pet).then((value) {
+            PetDaoImpl().update(pet).then((value) {
               if (value > 0) showAlertDialog(context, messageAlertUpd);
             });
           } else {
@@ -73,7 +73,7 @@ class _FormPetPageState extends State<FormPetPage> {
             pet.SpeciePet = _specieDelectedValue;
             pet.GenderPet = _genderDelectedValue;
 
-            db.insert(pet).then((value) {
+            PetDaoImpl().insert(pet).then((value) {
               pet.IdPet = value;
               if (value > 0) showAlertDialog(context, messageAlertNew);
             });
@@ -319,7 +319,7 @@ class _FormPetPageState extends State<FormPetPage> {
                     pet.SpeciePet = _specieDelectedValue;
                     pet.GenderPet = _genderDelectedValue;
                     pet.IdPet = recPet.IdPet;
-                    db.update(pet).then((value) {
+                    PetDaoImpl().update(pet).then((value) {
                       if (value > 0) showAlertDialog(context, messageAlertUpd);
                     });
                   } else {
@@ -328,7 +328,7 @@ class _FormPetPageState extends State<FormPetPage> {
                     pet.SpeciePet = _specieDelectedValue;
                     pet.GenderPet = _genderDelectedValue;
 
-                    db.insert(pet).then((value) {
+                    PetDaoImpl().insert(pet).then((value) {
                       pet.IdPet = value;
                       if (value > 0) showAlertDialog(context, messageAlertNew);
                     });
@@ -602,7 +602,7 @@ class _FormPetPageState extends State<FormPetPage> {
                     pet.SpeciePet = _specieDelectedValue;
                     pet.GenderPet = _genderDelectedValue;
                     pet.IdPet = recPet.IdPet;
-                    db.update(pet).then((value) {
+                    PetDaoImpl().update(pet).then((value) {
                       if (value > 0) showAlertDialog(context, messageAlertUpd);
                     });
                   } else {
@@ -611,7 +611,7 @@ class _FormPetPageState extends State<FormPetPage> {
                     pet.SpeciePet = _specieDelectedValue;
                     pet.GenderPet = _genderDelectedValue;
 
-                    db.insert(pet).then((value) {
+                    PetDaoImpl().insert(pet).then((value) {
                       pet.IdPet = value;
                       if (value > 0) showAlertDialog(context, messageAlertNew);
                     });
@@ -879,7 +879,7 @@ class _FormPetPageState extends State<FormPetPage> {
                     pet.SpeciePet = _specieDelectedValue;
                     pet.GenderPet = _genderDelectedValue;
                     pet.IdPet = recPet.IdPet;
-                    db.update(pet).then((value) {
+                    PetDaoImpl().update(pet).then((value) {
                       if (value > 0) showAlertDialog(context, messageAlertUpd);
                     });
                   } else {
@@ -888,7 +888,7 @@ class _FormPetPageState extends State<FormPetPage> {
                     pet.SpeciePet = _specieDelectedValue;
                     pet.GenderPet = _genderDelectedValue;
 
-                    db.insert(pet).then((value) {
+                    PetDaoImpl().insert(pet).then((value) {
                       pet.IdPet = value;
                       if (value > 0) showAlertDialog(context, messageAlertNew);
                     });
@@ -1153,7 +1153,7 @@ class _FormPetPageState extends State<FormPetPage> {
                     pet.SpeciePet = _specieDelectedValue;
                     pet.GenderPet = _genderDelectedValue;
                     pet.IdPet = recPet.IdPet;
-                    db.update(pet).then((value) {
+                    PetDaoImpl().update(pet).then((value) {
                       if (value > 0) showAlertDialog(context, messageAlertUpd);
                     });
                   } else {
@@ -1162,7 +1162,7 @@ class _FormPetPageState extends State<FormPetPage> {
                     pet.SpeciePet = _specieDelectedValue;
                     pet.GenderPet = _genderDelectedValue;
 
-                    db.insert(pet).then((value) {
+                    PetDaoImpl().insert(pet).then((value) {
                       pet.IdPet = value;
                       if (value > 0) showAlertDialog(context, messageAlertNew);
                     });
